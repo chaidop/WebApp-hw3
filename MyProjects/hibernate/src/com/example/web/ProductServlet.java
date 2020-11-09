@@ -84,15 +84,15 @@ public class ProductServlet extends HttpServlet {
 		if(temp == null) {//it doesnt exist, so save it
 			
 			productDao.saveProduct(newProduct);
+			request.setAttribute("styles", newProduct);
+			
 		}
 		else {
-			newProduct.setName("***ERROR***");
+			//newProduct.setName("***ERROR***");
+			request.setAttribute("styles", null);
 		}
-		//response.sendRedirect("list");
-		productDao.saveProduct(newProduct);
-		request.setAttribute("styles", newProduct);
-		RequestDispatcher view = request.getRequestDispatcher("product-list.jsp");
 		try {
+			RequestDispatcher view = request.getRequestDispatcher("product-list.jsp");
 			view.forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
